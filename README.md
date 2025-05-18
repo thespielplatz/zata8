@@ -2,9 +2,13 @@
 
 **Zata8** is a modern 8-player remake of the classic DOS game *Zatacka*. Built for party-style, local multiplayer chaos, players compete on one screen using custom two-button controllers. Dodge, turn, and outlast your friends — or crash in style.
 
+![Zata8 Logo](docs/assets/zata8_bar.png)
+
 ---
 
 ## 🎮 Features
+
+_nothing done yet_
 
 ---
 
@@ -39,7 +43,7 @@ Logos and visual assets may be under a different license — see `/design`.
 
 ## 🙌 Credits
 
-- Concept and development by [@thespielplatz]
+- Concept and development by [thespielplatz](https://github.com/thespielplatz)
 - Inspired by the original *Zatacka* game
 - Built with [Godot Engine](https://godotengine.org/)
 
