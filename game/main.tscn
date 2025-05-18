@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1tbkpyg34v0s"]
+
+[ext_resource type="Script" uid="uid://bejyccthjgn6e" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://ca01j47gffbx2" path="res://Player.tscn" id="2_0xm2m"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_ig7tw")
+
+[node name="Player1" parent="." instance=ExtResource("2_0xm2m")]
+player_color = Color(100, 0, 0, 1)
+
+[node name="Player2" parent="." instance=ExtResource("2_0xm2m")]
+player_color = Color(0.0294124, 0.477417, 0.0238992, 1)
