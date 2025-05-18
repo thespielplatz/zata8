@@ -1,0 +1,41 @@
+# Godot-specific
+.import/
+.godot/
+export.cfg
+export_presets.cfg
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+
+# PlatformIO
+controller/.pio/
+controller/.pioenvs/
+controller/.piolibdeps/
+controller/.clang_complete
+controller/.gcc-flags.json
+controller/.python-version
+controller/platformio.ini.save
+controller/lib_deps/
+
+# Build output
+*.bin
+*.elf
+*.map
+
+# Logs and caches
+*.log
+
+# Hardware and 3D tools
+hardware/*.fzz.bak
+hardware/*.3mf
+hardware/*.gcode
+hardware/*_backup.*
+
+# Optional docs
+docs/assets/tmp/
+docs/**/*.bak
