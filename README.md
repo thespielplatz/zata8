@@ -15,6 +15,8 @@
   - Tight arcade-style turning mechanics
 - USB controller support (custom ESP32 HID device)
 - 3D-printable controller housing and button panel
+- Zata8: Snake trailing on the menu screen
+- Zata8: Default winning points `(numOfPlayers - 1) * 10` and make it configureable
 
 ---
 
