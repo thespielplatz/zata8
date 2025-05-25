@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://ca01j47gffbx2"]
 
-[ext_resource type="Script" uid="uid://dwjqddre8d17x" path="res://Player.gd" id="1_xhfnw"]
+[ext_resource type="Script" uid="uid://dwjqddre8d17x" path="res://Worm/Worm.gd" id="1_hvrp0"]
 
-[node name="Player" type="Node2D"]
-script = ExtResource("1_xhfnw")
+[node name="Worm" type="Node2D"]
+script = ExtResource("1_hvrp0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 

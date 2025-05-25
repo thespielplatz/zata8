@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://bli3i0w436dhi"]
+
+[ext_resource type="Script" uid="uid://4u0rdwjsb4u0" path="res://Scoreboard/Scoreboard.gd" id="1_dxrc0"]
+[ext_resource type="Texture2D" uid="uid://drpgr2brkr6wu" path="res://assets/zata8_logo.png" id="2_uj5bf"]
+[ext_resource type="FontFile" uid="uid://dyo5x55oe8eea" path="res://assets/Jersey15-Regular.ttf" id="3_50vnw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_p0f4m"]
+font = ExtResource("3_50vnw")
+font_size = 40
+font_color = Color(0.996078, 0.835294, 0.00392157, 1)
+shadow_size = 0
+shadow_color = Color(0.137255, 0.984314, 0.901961, 1)
+
+[node name="Scoreboard" type="Control"]
+layout_mode = 3
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 300.0
+grow_vertical = 2
+size_flags_horizontal = 0
+script = ExtResource("1_dxrc0")
+
+[node name="Backgroud" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2, 8)
+scale = Vector2(0.348, 0.348)
+texture = ExtResource("2_uj5bf")
+centered = false
+
+[node name="LeftBorder" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+color = Color(0, 1, 1, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 107.0
+offset_right = 193.0
+offset_bottom = 134.0
+text = "SURVIVE THE CURVE"
+label_settings = SubResource("LabelSettings_p0f4m")

@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1tbkpyg34v0s"]
+
+[ext_resource type="Script" uid="uid://bejyccthjgn6e" path="res://Game.gd" id="1_xkndl"]
+[ext_resource type="PackedScene" uid="uid://cdjk4b0nab8wi" path="res://GameArea/GameArea.tscn" id="2_u44n3"]
+[ext_resource type="PackedScene" uid="uid://bli3i0w436dhi" path="res://Scoreboard/Scoreboard.tscn" id="2_xkndl"]
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xkndl")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="GameArea" parent="HBoxContainer" instance=ExtResource("2_u44n3")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Scoreboard" parent="HBoxContainer" instance=ExtResource("2_xkndl")]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 8
