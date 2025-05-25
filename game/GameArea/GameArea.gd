@@ -1,7 +1,7 @@
 extends Control
 
 const START_POSITION_MARGIN = 200
-const START_POSITION_MAX_ATTEMPTS = 100
+const START_POSITION_MAX_ATTEMPTS = 200
 const START_FORWARD_CLEARANCE = 80
 
 var players = []
@@ -15,17 +15,14 @@ func clear_worms():
 func add_worm(player_data):
 	var existing_positions: Array[Vector2] = []
 	for worm in players:
-		existing_positions.append(worm.global_position)
+		existing_positions.append(worm.start_position)
 
 	var spawn_data = _get_random_position_and_angle(existing_positions)
 	var spawn_pos = spawn_data["position"]
 	var spawn_angle = spawn_data["angle"]
 
 	var worm = worm_scene.instantiate()
-	worm.color = player_data.color
-	worm.player_data = player_data
-	worm.start_position = spawn_pos
-	worm.angle = spawn_angle  # store angle (you'll need to expose this in Worm script)
+	worm.initialize(player_data, spawn_pos, spawn_angle)
 	add_child(worm)
 	players.append(worm)
 

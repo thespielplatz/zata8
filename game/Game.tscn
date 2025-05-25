@@ -14,7 +14,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xkndl")
 
-[node name="UI" type="HBoxContainer" parent="."]
+[node name="Layout" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,15 +23,15 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
-[node name="GameArea" parent="UI" instance=ExtResource("2_u44n3")]
+[node name="GameArea" parent="Layout" instance=ExtResource("2_u44n3")]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Scoreboard" parent="UI" instance=ExtResource("2_xkndl")]
+[node name="Scoreboard" parent="Layout" instance=ExtResource("2_xkndl")]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 
 [node name="GameController" type="Node" parent="." node_paths=PackedStringArray("game_area")]
 script = ExtResource("4_sb48q")
-game_area = NodePath("../UI/GameArea")
+game_area = NodePath("../Layout/GameArea")

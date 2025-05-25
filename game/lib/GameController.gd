@@ -17,9 +17,26 @@ func _ready():
 
 func _create_players():
 	players.clear()
-	for i in range(player_names.size()):
-		var p = Player.new(player_names[i], colors[i])
-		players.append(p)
+
+	var player_configs = [
+		{ "name": "Player 1", "color": Color.RED,    "left": KEY_1,            "right": KEY_Q,            "isPlaying": true },
+		{ "name": "Player 2", "color": Color.BLUE,   "left": KEY_CTRL,         "right": KEY_ALT,          "isPlaying": true },
+		{ "name": "Player 3", "color": Color.GREEN,  "left": KEY_M,            "right": KEY_COMMA,    "isPlaying": true },
+		{ "name": "Player 4", "color": Color.YELLOW, "left": KEY_LEFT,         "right": KEY_DOWN,         "isPlaying": true },
+		{ "name": "Player 5", "color": Color.PURPLE, "left": KEY_KP_DIVIDE,    "right": KEY_KP_MULTIPLY,  "isPlaying": false },
+		{ "name": "Player 6", "color": Color.ORANGE, "left": MOUSE_BUTTON_LEFT,      "right": MOUSE_BUTTON_RIGHT,     "isPlaying": false }
+	]
+
+	for config in player_configs:
+		if config.has("isPlaying") and config["isPlaying"]:
+			var player = Player.new(
+				config["name"],
+				config["color"],
+				config["left"],
+				config["right"]
+			)
+			players.append(player)
+
 
 func _start_round():
 	game_area.clear_worms()
