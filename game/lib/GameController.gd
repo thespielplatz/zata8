@@ -8,7 +8,8 @@ extends Node
 var players: Array[Player] = []
 var score_to_win: int
 
-func _ready():
+func _ready():	
+	await get_tree().process_frame	
 	_create_players()
 	score_to_win = (players.size() - 1) * 10
 	print("Score to win: ", score_to_win)

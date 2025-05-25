@@ -24,32 +24,26 @@ func add_worm(player_data):
 	var worm = worm_scene.instantiate()
 	worm.color = player_data.color
 	worm.player_data = player_data
-	worm.global_position = spawn_pos
+	worm.start_position = spawn_pos
 	worm.angle = spawn_angle  # store angle (you'll need to expose this in Worm script)
 	add_child(worm)
 	players.append(worm)
 
 func _get_random_position_and_angle(existing_positions: Array[Vector2]) -> Dictionary:
-	var max_x = size.x - START_POSITION_MARGIN * 2
-	var max_y = size.y - START_POSITION_MARGIN * 2
-
-	var candidate = Vector2.ZERO
+	var local_x = randf_range(START_POSITION_MARGIN, size.x - START_POSITION_MARGIN)
+	var local_y = randf_range(START_POSITION_MARGIN, size.y - START_POSITION_MARGIN)
+	var candidate = Vector2(local_x, local_y)
 	var angle = 0.0
 	var attempt = 0
 
 	while attempt < START_POSITION_MAX_ATTEMPTS:
-		var x = randf_range(START_POSITION_MARGIN, START_POSITION_MARGIN + max_x)
-		var y = randf_range(START_POSITION_MARGIN, START_POSITION_MARGIN + max_y)
-		candidate = Vector2(x, y)
 		angle = randf_range(0, TAU)  # full 360 degrees in radians
-
 		var too_close = false
 		for pos in existing_positions:
 			if pos.distance_to(candidate) < START_POSITION_MARGIN:
 				too_close = true
 				break
 
-			# Check forward clearance
 			var forward_point = candidate + Vector2.RIGHT.rotated(angle) * START_FORWARD_CLEARANCE
 			if pos.distance_to(forward_point) < START_POSITION_MARGIN:
 				too_close = true
