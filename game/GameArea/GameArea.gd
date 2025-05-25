@@ -1,23 +1,64 @@
 extends Control
 
+const START_POSITION_MARGIN = 200
+const START_POSITION_MAX_ATTEMPTS = 100
+const START_FORWARD_CLEARANCE = 80
+
 var players = []
+var worm_scene = preload("res://Worm/Worm.tscn")
 
-func _ready():
-	var player_scene = load("res://Worm/Worm.tscn")
-	var player1 = player_scene.instantiate()
-	player1.name = "Player1"
-	player1.global_position = Vector2(200, 300)
-	player1.left_action = KEY_Q
-	player1.right_action = KEY_W
-	player1.color = Color.RED
-	add_child(player1)
-	players.push_back(player1)
+func clear_worms():
+	for worm in players:
+		worm.queue_free()
+	players.clear()
 
-	var player2 = player_scene.instantiate()
-	player2.name = "Player2"
-	player2.color = Color.BLUE
-	player2.global_position = Vector2(600, 300)
-	player2.left_action = KEY_O
-	player2.right_action = KEY_P
-	add_child(player2)
-	players.push_back(player2)
+func add_worm(player_data):
+	var existing_positions: Array[Vector2] = []
+	for worm in players:
+		existing_positions.append(worm.global_position)
+
+	var spawn_data = _get_random_position_and_angle(existing_positions)
+	var spawn_pos = spawn_data["position"]
+	var spawn_angle = spawn_data["angle"]
+
+	var worm = worm_scene.instantiate()
+	worm.color = player_data.color
+	worm.player_data = player_data
+	worm.global_position = spawn_pos
+	worm.angle = spawn_angle  # store angle (you'll need to expose this in Worm script)
+	add_child(worm)
+	players.append(worm)
+
+func _get_random_position_and_angle(existing_positions: Array[Vector2]) -> Dictionary:
+	var max_x = size.x - START_POSITION_MARGIN * 2
+	var max_y = size.y - START_POSITION_MARGIN * 2
+
+	var candidate = Vector2.ZERO
+	var angle = 0.0
+	var attempt = 0
+
+	while attempt < START_POSITION_MAX_ATTEMPTS:
+		var x = randf_range(START_POSITION_MARGIN, START_POSITION_MARGIN + max_x)
+		var y = randf_range(START_POSITION_MARGIN, START_POSITION_MARGIN + max_y)
+		candidate = Vector2(x, y)
+		angle = randf_range(0, TAU)  # full 360 degrees in radians
+
+		var too_close = false
+		for pos in existing_positions:
+			if pos.distance_to(candidate) < START_POSITION_MARGIN:
+				too_close = true
+				break
+
+			# Check forward clearance
+			var forward_point = candidate + Vector2.RIGHT.rotated(angle) * START_FORWARD_CLEARANCE
+			if pos.distance_to(forward_point) < START_POSITION_MARGIN:
+				too_close = true
+				break
+
+		if not too_close:
+			return { "position": candidate, "angle": angle }
+
+		attempt += 1
+
+	push_warning("No safe start position + angle found after %d attempts. Using last candidate anyway." % START_POSITION_MAX_ATTEMPTS)
+	return { "position": candidate, "angle": angle }

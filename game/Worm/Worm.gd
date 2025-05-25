@@ -1,3 +1,4 @@
+# res://Worm/Worm.gd
 extends Node2D
 
 @export var left_action: Key
@@ -6,6 +7,7 @@ extends Node2D
 @export var turn_speed: float = 3.0
 @export var color: Color = Color.WHITE
 
+var player_data: Player
 var angle = 0.0
 var trail: Line2D
 var playerHead: Vector2 = Vector2(0, 0)
@@ -23,5 +25,4 @@ func _process(delta):
 
 	var dir = Vector2.RIGHT.rotated(angle)
 	playerHead += dir * speed * delta
-
 	trail.add_point(playerHead)
