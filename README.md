@@ -49,7 +49,6 @@ _nothing done yet_
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE).  
-Logos and visual assets may be under a different license — see `/design`.
 
 ---
 
