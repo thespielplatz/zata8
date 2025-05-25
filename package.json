@@ -1,0 +1,14 @@
+{
+  "name": "zata8",
+  "version": "0.0.1",
+  "description": "Zata8 is a modern 8-player remake of the classic DOS game *Zatacka*. Built for party-style, local multiplayer chaos, players compete on one screen using custom two-button controllers. Dodge, turn, and outlast your friends — or crash in style.",
+  "scripts": {
+    "start": "echo 'Start your Godot editor manually'",
+    "build": "echo 'Add your build script here'",
+    "test": "echo 'No tests yet'"
+  },
+  "author": "Philipp Horwath",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {}
+}

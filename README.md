@@ -1,5 +1,17 @@
 # 🌀 Zata8
 
+<p>
+  <a href="https://github.com/thespielplatz/zata8/">
+    <img src="https://img.shields.io/github/package-json/v/thespielplatz/zata8?color=F7941E" alt="Version">
+  </a>
+  <a href="https://github.com/thespielplatz/zata8/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/thespielplatz/zata8?color=F7941E" alt="Licence">
+  </a>
+  <a href="https://github.com/thespielplatz/nuxt-auth/stargazers">
+    <img src="https://img.shields.io/github/stars/thespielplatz/zata8.svg?style=flat&color=F7941E" alt="Stars">
+  </a>
+</p>
+
 **Zata8** is a modern 8-player remake of the classic DOS game *Zatacka*. Built for party-style, local multiplayer chaos, players compete on one screen using custom two-button controllers. Dodge, turn, and outlast your friends — or crash in style.
 
 ![Zata8 Logo](docs/assets/zata8_bar.png)
@@ -52,3 +64,7 @@ Logos and visual assets may be under a different license — see `/design`.
 ## 🧠 Contributions
 
 PRs, feedback, bug reports, and gameplay ideas are welcome!
+
+## Support
+
+If you like this project, give it a star! If you love it, fork it and take it out for dinner. 🌟🍽️ And hey, why not [send some tip love?](https://thespielplatz.com/tip-jar)
