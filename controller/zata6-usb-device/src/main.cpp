@@ -36,26 +36,26 @@ void setup() {
 
         // Left button callbacks
         players[i].leftButton.onPress([index]() {
-            Serial.printf("Player %d LEFT pressed!\n", index + 1);
-            pixels.setPixelColor(players[index].pixelIndex, pixels.Color(HIGH_BRIGHTNESS, players[index].g, players[index].b));
             if (bleKeyboard.isConnected()) bleKeyboard.press(players[index].leftKey);
+            pixels.setPixelColor(players[index].pixelIndex, pixels.Color(HIGH_BRIGHTNESS, players[index].g, players[index].b));
+            Serial.printf("Player %d LEFT pressed!\n", index + 1);
         });
         players[i].leftButton.onRelease([index]() {
-            Serial.printf("Player %d LEFT released!\n", index + 1);
-            pixels.setPixelColor(players[index].pixelIndex, pixels.Color(LOW_BRIGHTNESS, players[index].g, players[index].b));
             if (bleKeyboard.isConnected()) bleKeyboard.release(players[index].leftKey);
+            pixels.setPixelColor(players[index].pixelIndex, pixels.Color(LOW_BRIGHTNESS, players[index].g, players[index].b));
+            Serial.printf("Player %d LEFT released!\n", index + 1);
         });
 
         // Right button callbacks
         players[i].rightButton.onPress([index]() {
-            Serial.printf("Player %d RIGHT pressed!\n", index + 1);
-            pixels.setPixelColor(players[index].pixelIndex, pixels.Color(HIGH_BRIGHTNESS, players[index].g, players[index].b));
             if (bleKeyboard.isConnected()) bleKeyboard.press(players[index].rightKey);
+            pixels.setPixelColor(players[index].pixelIndex, pixels.Color(HIGH_BRIGHTNESS, players[index].g, players[index].b));
+            Serial.printf("Player %d RIGHT pressed!\n", index + 1);
         });
         players[i].rightButton.onRelease([index]() {
-            Serial.printf("Player %d RIGHT released!\n", index + 1);
-            pixels.setPixelColor(players[index].pixelIndex, pixels.Color(LOW_BRIGHTNESS, players[index].g, players[index].b));
             if (bleKeyboard.isConnected()) bleKeyboard.release(players[index].rightKey);
+            pixels.setPixelColor(players[index].pixelIndex, pixels.Color(LOW_BRIGHTNESS, players[index].g, players[index].b));
+            Serial.printf("Player %d RIGHT released!\n", index + 1);
         });
     }
 
