@@ -1,49 +1,73 @@
 #include <Arduino.h>
 #include <Adafruit_NeoPixel.h>
-#include "lib/DebounceButton.h"
+#include <BleKeyboard.h>
 
-#define PIN_WS2818 18
-#define NUM_OF_PLAYERS 1
-#define LOW_BRIGHTNESS 20
-#define HIGH_BRIGHTNESS 50 
+#include "lib/Player.h"
 
-DebounceButton button1(23);
-DebounceButton button2(22);
+#define PIN_WS2818        18
+#define NUM_OF_PLAYERS    2
+#define LOW_BRIGHTNESS    20
+#define HIGH_BRIGHTNESS   50
+
 Adafruit_NeoPixel pixels(NUM_OF_PLAYERS, PIN_WS2818, NEO_RGB + NEO_KHZ800);
+BleKeyboard bleKeyboard("Zata8 Multipad");
+
+// Define players (expand as needed)
+Player players[NUM_OF_PLAYERS] = {
+    Player(23, 22, 0, LOW_BRIGHTNESS, 0, 0, '1', 'q'),     // Player 1 → Red, keys 1/q
+    Player(19, 21, 1, 0, LOW_BRIGHTNESS, 0, '2', 'w')      // Player 2 → Green, keys 2/w
+};
 
 void setup() {
     Serial.begin(115200);
-    button1.begin();
-    button2.begin();
+    bleKeyboard.begin();
     pixels.begin();
-    Serial.println("Setup complete. Waiting for button presses...");
     pixels.clear();
-    pixels.setPixelColor(0, pixels.Color(LOW_BRIGHTNESS, 0, 0));
 
-    button1.onPress([]() {
-        Serial.println("Button 1 (GPIO 23) pressed!");
-        pixels.setPixelColor(0, pixels.Color(HIGH_BRIGHTNESS, 0, 0));
-    });
+    for (int i = 0; i < NUM_OF_PLAYERS; i++) {
+        players[i].leftButton.begin();
+        players[i].rightButton.begin();
 
-    button1.onRelease([]() {
-        Serial.println("Button 1 (GPIO 23) released!");
-        pixels.setPixelColor(0, pixels.Color(LOW_BRIGHTNESS, 0, 0));
-    });
+        // Initialize LEDs to low brightness player color
+        pixels.setPixelColor(players[i].pixelIndex, pixels.Color(players[i].r, players[i].g, players[i].b));
 
-    button2.onPress([]() {
-        Serial.println("Button 2 (GPIO 22) pressed!");
-        pixels.setPixelColor(0, pixels.Color(HIGH_BRIGHTNESS, 0, 0));
-    });
+        // Capture player index for use in lambdas
+        int index = i;
 
-    button2.onRelease([]() {
-        Serial.println("Button 2 (GPIO 22) released!");
-        pixels.setPixelColor(0, pixels.Color(LOW_BRIGHTNESS, 0, 0));
-    });
+        // Left button callbacks
+        players[i].leftButton.onPress([index]() {
+            Serial.printf("Player %d LEFT pressed!\n", index + 1);
+            pixels.setPixelColor(players[index].pixelIndex, pixels.Color(HIGH_BRIGHTNESS, players[index].g, players[index].b));
+            if (bleKeyboard.isConnected()) bleKeyboard.press(players[index].leftKey);
+        });
+        players[i].leftButton.onRelease([index]() {
+            Serial.printf("Player %d LEFT released!\n", index + 1);
+            pixels.setPixelColor(players[index].pixelIndex, pixels.Color(LOW_BRIGHTNESS, players[index].g, players[index].b));
+            if (bleKeyboard.isConnected()) bleKeyboard.release(players[index].leftKey);
+        });
+
+        // Right button callbacks
+        players[i].rightButton.onPress([index]() {
+            Serial.printf("Player %d RIGHT pressed!\n", index + 1);
+            pixels.setPixelColor(players[index].pixelIndex, pixels.Color(HIGH_BRIGHTNESS, players[index].g, players[index].b));
+            if (bleKeyboard.isConnected()) bleKeyboard.press(players[index].rightKey);
+        });
+        players[i].rightButton.onRelease([index]() {
+            Serial.printf("Player %d RIGHT released!\n", index + 1);
+            pixels.setPixelColor(players[index].pixelIndex, pixels.Color(LOW_BRIGHTNESS, players[index].g, players[index].b));
+            if (bleKeyboard.isConnected()) bleKeyboard.release(players[index].rightKey);
+        });
+    }
+
+    pixels.show();
+    Serial.println("Setup complete. Waiting for button presses...");
 }
 
 void loop() {
-    button1.update();
-    button2.update();
+    for (int i = 0; i < NUM_OF_PLAYERS; i++) {
+        players[i].leftButton.update();
+        players[i].rightButton.update();
+    }
     pixels.show();
-    delay(10);  // light loop delay
+    delay(10);
 }
